@@ -13,7 +13,6 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = '<github url where the tool code will remain>',
-    py_modules = ['smartMutate', 'src'],
     packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.7',
@@ -23,6 +22,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        smartMutate=smartMutate:cli
+        cli=src.smartMutator.cli.convertCLI:cli
     '''
 )

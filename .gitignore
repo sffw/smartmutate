@@ -1,8 +1,8 @@
 .vscode/
 .venv*/
 venv*/
-.env*/
-env*/
+.env
 __pycache__/
 dist/
-
+mutateTestor.py
+SYSTEMDESIGN.md
