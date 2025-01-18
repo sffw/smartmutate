@@ -1,3 +1,3 @@
-click>=8.1.3
+click>=8.1.3  # CLI
 anthropic>=0.42.0
 python-dotenv>=1.0.1

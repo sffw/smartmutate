@@ -4,32 +4,8 @@ from typing import Dict, Any
 from .base_handler import BaseHandler
 
 class JSONHandler(BaseHandler):
-    """Handler for JSON format files.
-    
-    This handler provides functionality to load and validate JSON files,
-    converting them to and from Python dictionaries.
-    """
-    
+    """Handler for JSON format files."""
     def load(self, file_path: Path) -> Dict[str, Any]:
-        """Load and parse a JSON file into a Python dictionary.
-        
-        This method performs several steps:
-        1. Validates the file exists and is readable
-        2. Reads the file content
-        3. Parses the JSON into a Python dictionary
-        4. Returns the resulting dictionary
-        
-        Args:
-            file_path: Path to the JSON file
-            
-        Returns:
-            Dict containing the parsed JSON data
-            
-        Raises:
-            FileNotFoundError: If the file doesn't exist
-            PermissionError: If the file isn't readable
-            ValueError: If the JSON is invalid
-        """
         # First validate the file
         self.validate(file_path)
         
@@ -56,24 +32,7 @@ class JSONHandler(BaseHandler):
             ) from e
     
     def validate(self, file_path: Path) -> bool:
-        """Validate that a file contains valid JSON data.
-        
-        This method checks:
-        1. File exists and is readable
-        2. Content is valid JSON
-        3. Root element is a dictionary/object
-        
-        Args:
-            file_path: Path to the JSON file
-            
-        Returns:
-            bool: True if file contains valid JSON
-            
-        Raises:
-            FileNotFoundError: If file doesn't exist
-            PermissionError: If file isn't readable
-            ValueError: If JSON is invalid
-        """
+        """Validate that a file contains valid JSON data."""
         if not file_path.exists():
             raise FileNotFoundError(f"File not found: {file_path}")
             

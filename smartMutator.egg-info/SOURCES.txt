@@ -1,0 +1,12 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+smartMutator.egg-info/PKG-INFO
+smartMutator.egg-info/SOURCES.txt
+smartMutator.egg-info/dependency_links.txt
+smartMutator.egg-info/entry_points.txt
+smartMutator.egg-info/requires.txt
+smartMutator.egg-info/top_level.txt
+tests/__init__.py
