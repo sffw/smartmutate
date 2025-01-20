@@ -22,6 +22,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        cli=src.smartMutator.cli.convertCLI:cli
+        cli=src.cli:mainCLI
     '''
 )

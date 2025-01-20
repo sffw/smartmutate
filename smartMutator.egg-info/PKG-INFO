@@ -68,6 +68,10 @@ with converter.stream_convert("large_input.csv", "output.json") as stream:
 - XML
 - YAML
 - Excel (xlsx, xls)
+- TSV (Tab-separated values)
+- Fixed-width text files
+- Markdown
+- HTML
 - More formats coming soon!
 
 ## Configuration

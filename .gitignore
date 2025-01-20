@@ -6,4 +6,6 @@ __pycache__/
 dist/
 mutateTestor.py
 SYSTEMDESIGN.md
-output/
+/output/
+/sample_data/
+/smartMutator.egg-info/
