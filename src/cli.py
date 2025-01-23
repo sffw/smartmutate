@@ -7,7 +7,7 @@ from .engine import ConversionEngine
 @click.command()
 @click.argument("input", type=click.Path(exists=True)) #validate input file as valid path
 @click.argument("output", type=click.Path())
-def mainCLI(input: str, output: str) -> None:
+def cli(input: str, output: str) -> None:
     """
     SmartMutator CLI tool for converting files between formats.
     

@@ -1,4 +1,4 @@
-# smartMutatormartMutator a powerful file conversion tool powered by Anthropic's Claude AI. It enables seamless conversion between various file formats while preserving context and meaning through AI-powered interpretation.
+# ConvertPyAI a powerful file conversion tool powered by Anthropic's Claude AI. It enables seamless conversion between various file formats while preserving context and meaning through AI-powered interpretation.
 
 ## Features
 

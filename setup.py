@@ -22,6 +22,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        cli=src.cli:mainCLI
+        smartmutator=src.cli:cli
     '''
 )
