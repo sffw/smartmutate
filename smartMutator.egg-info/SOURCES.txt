@@ -13,7 +13,7 @@ src/__init__.py
 src/api.py
 src/cli.py
 src/engine.py
-src/fileHandler.py
+src/fileProcessor.py
 src/registry.py
 src/handlers/__init__.py
 src/handlers/base_handler.py

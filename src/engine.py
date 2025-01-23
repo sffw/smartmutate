@@ -1,6 +1,7 @@
-
 from pathlib import Path
 from typing import Any
+from .fileProcessor import FileProcessor
+from .api import ConverterAPI
 
 class ConversionEngine:
     """
@@ -8,27 +9,41 @@ class ConversionEngine:
     get input -> parse to dict -> convert_with_claude -> output file
     """
 
-    def __init__(self, input_data: Any, input_format: str,output_path: Path):
-        self.input_data = input_data
-        self.input_format = input_format
+    def __init__(self, input_path: Path, output_path: Path):
+        self.input_path = input_path
         self.output_path = output_path
+        self.file_processor = FileProcessor()
+        self.input_data = self.get_input_data()
 
-    # Intake data, validate, and convert
-    # Step 1: Validate input data
-        # check input format, check output format
-        # return input_format, output_format, input_data
-    # Step 2: Convert input_data
-        # Pass input_format, output_format, data to converter
-            # API passed formats into prompt generator 
-            # API appends data to prompt
-            # API returns output data object
-    # Step 3: Write output to file 
-    
-    
+    def get_input_data(self) -> Any:
+        """
+        Validates and loads the input data using the FileProcessor.
+        
+        Returns:
+            Any: The loaded input data
+            
+        Raises:
+            ValueError: If the input format is invalid
+        """
+        if self.file_processor.validate_format(self.input_path):
+            self.input_data = self.file_processor.load_input_data(self.input_path)
+            return self.input_data
+        else:
+            raise ValueError("Invalid input format")
+        
     def convert(self) -> None:
         """
         Orchestrates the complete file conversion workflow.
+        
+        This method handles the entire conversion process:
+        1. Gets the source and target formats
+        2. Converts the data using the ConverterAPI
+        3. Generates the output file
         """
-        print("output path", self.output_path)
-        print("input data", self.input_data)
-        print("input format", self.input_format)
+        source_format = self.file_processor.get_file_format(self.input_path)
+        target_format = self.file_processor.get_file_format(self.output_path)
+        
+        converter_api = ConverterAPI()
+        converted_data = converter_api.convert(self.input_data, source_format, target_format)
+        
+        self.file_processor.generate_output(converted_data, self.output_path)
