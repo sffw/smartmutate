@@ -1,32 +1,25 @@
+
 from pathlib import Path
-from typing import Union, BinaryIO, TextIO, Dict, Any
+from typing import Dict, Any
 import pandas as pd
 import yaml
 import xml.etree.ElementTree as ET
 import json
 
-from .registry import SUPPORTED_FORMATS
+from .registry import FileFormat
 
 class FileProcessor:
     """A class to handle various file operations including reading, writing, and format validation."""
     
     def __init__(self):
         """Initialize the FileProcessor with supported formats."""
-        self.supported_formats = SUPPORTED_FORMATS
+        self.supported_formats = {format.value for format in FileFormat}
+
 
     def load_input_data(self, file_path: Path) -> Any:
         """
         Read file content based on its extension using pathlib.
         Returns the content as a string that can be sent to Claude API.
-        
-        Args:
-            file_path (Path): Path to the input file
-            
-        Returns:
-            Any: The content of the file in appropriate format
-            
-        Raises:
-            ValueError: If there's an error reading the file
         """
         suffix = self.get_file_format(file_path)
         
@@ -60,15 +53,6 @@ class FileProcessor:
     def validate_format(self, file_path: Path) -> bool:
         """
         Validate if the file format is supported.
-        
-        Args:
-            file_path (Path): Path to the file to validate
-            
-        Returns:
-            bool: True if format is supported
-            
-        Raises:
-            ValueError: If format is not supported
         """
         format_name = self.get_file_format(file_path)
 
@@ -83,15 +67,6 @@ class FileProcessor:
     def get_file_format(self, file_path: Path) -> str:
         """
         Detect the format of a file based on its extension.
-        
-        Args:
-            file_path (Path): Path to the file
-            
-        Returns:
-            str: The file format without the leading period
-            
-        Raises:
-            ValueError: If no file extension is found
         """
         if not file_path.suffix:
             raise ValueError(f"No file extension found in: {file_path}")
@@ -104,13 +79,6 @@ class FileProcessor:
     def generate_output(self, data: Dict[str, Any], file_path: Path) -> None:
         """
         Generate output file based on its extension using pathlib.
-        
-        Args:
-            data (Dict[str, Any]): Data to write to the file
-            file_path (Path): Path where the file should be written
-            
-        Raises:
-            ValueError: If there's an error writing the file
         """
         # Check if file exists, if not create it
         if not file_path.exists():

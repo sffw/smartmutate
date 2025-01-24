@@ -1,7 +1,5 @@
 from enum import Enum
 
-SUPPORTED_FORMATS = [ "json", "csv", "yaml", "txt"]
-
 class FileFormat(Enum):
     """Supported file formats for conversion"""
     JSON = "json"
