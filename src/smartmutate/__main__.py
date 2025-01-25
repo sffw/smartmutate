@@ -14,9 +14,9 @@ def load_api_key(env_path: Path | None = None) -> str:
             raise ValueError(f"Environment file not found: {env_path}")
         load_dotenv(env_path)
     
-    api_key = os.getenv("API_KEY")
+    api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise ValueError("API_KEY not found in environment or .env file")
+        raise ValueError("ANTHROPIC_API_KEY not found in environment or .env file")
     return api_key
 
 @click.command()
@@ -25,7 +25,7 @@ def load_api_key(env_path: Path | None = None) -> str:
 @click.option("--api-key", default=None, help="Your Anthropic API key")
 @click.option("--env", type=click.Path(exists=True), help="Path to .env file")
 @click.option("--verbose", is_flag=True, help="Enable verbose output")
-def smartmutate(input: str, output: str, api_key: str | None, env: Path | None = None, verbose: bool = False) -> None: 
+def smartmutate(input: str, output: str, api_key: str | None, env: str | None = None, verbose: bool = False) -> None: 
     """
     SmartMutator CLI tool for converting files between formats.
     
@@ -39,7 +39,8 @@ def smartmutate(input: str, output: str, api_key: str | None, env: Path | None =
         
         if not api_key:
             try:
-                api_key = load_api_key(env)
+                env_path = Path(env) if env else None
+                api_key = load_api_key(env_path)
             except ValueError as e:
                 if not env:
                     api_key = click.prompt("Please enter your Anthropic API key", type=str)

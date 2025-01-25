@@ -1,3 +1,5 @@
-from .converter import convert_file
+from .converter import Converter
 
-__all__ = ["convert_file"]
+__all__ = [
+    "Converter"
+]

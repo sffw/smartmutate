@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smartmutate"
-version = "1.0.4"
+version = "1.0.9"
 authors = [
   { name="Spencer White", email="spence@sffw.dev" },
 ]
@@ -21,6 +21,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "pandas>=2.1.0",
     "pyyaml>=6.0.1",
+    "pytest>=8.3.4",
 ]
 
 [tool.setuptools]

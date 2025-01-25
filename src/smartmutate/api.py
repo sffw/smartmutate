@@ -1,4 +1,3 @@
-import os
 import anthropic
 from typing import Any
 
