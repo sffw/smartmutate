@@ -1,9 +1,10 @@
 .vscode/
 venv*/
 .env
+.pypirc
 __pycache__/
 dist/
-mutateTestor.py
-SYSTEMDESIGN.md
-/output/
-/sample_data/
+build/
+sample.json
+test.py
+*.egg-info/

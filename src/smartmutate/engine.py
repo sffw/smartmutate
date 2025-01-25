@@ -9,11 +9,12 @@ class ConversionEngine:
     get input -> parse to dict -> convert_with_claude -> output file
     """
 
-    def __init__(self, input_path: Path, output_path: Path):
+    def __init__(self, input_path: Path, output_path: Path, api_key: str):
         self.input_path = input_path
         self.output_path = output_path
         self.file_processor = FileProcessor()
         self.input_data = self.get_input_data()
+        self.api_key = api_key
 
     def get_input_data(self) -> Any:
         """
@@ -43,7 +44,7 @@ class ConversionEngine:
         source_format = self.file_processor.get_file_format(self.input_path)
         target_format = self.file_processor.get_file_format(self.output_path)
 
-        converter_api = ConverterAPI()
+        converter_api = ConverterAPI(api_key=self.api_key)
         
         converted_data = converter_api.convert(self.input_data, source_format, target_format)
 

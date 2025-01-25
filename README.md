@@ -104,7 +104,7 @@ converter.batch_convert(
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions!
 
 1. Fork the repository
 2. Create your feature branch
@@ -114,13 +114,3 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with [Anthropic's Claude API](https://anthropic.com)
-- Inspired by the need for intelligent file conversion in data processing pipelines
-
-## Support
-
-- 📚 [Documentation](https://smartMutatoradthedocs.io/)
-- 💬 [Discord Community](https://discord.gg/smartMutator 🐛 [Issue Tracker](https://github.com/yourusername/smartMutatorsues)

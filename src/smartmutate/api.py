@@ -6,8 +6,8 @@ from .registry import format_instructions
 
 
 class ConverterAPI:
-    def __init__(self):
-        self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+    def __init__(self, api_key: str):
+        self.client = anthropic.Anthropic(api_key=api_key)
 
     def get_client(self):
         return self.client

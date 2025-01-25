@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smartmutate"
+version = "1.0.4"
+authors = [
+  { name="Spencer White", email="spence@sffw.dev" },
+]
+description = "Use Anthropic Claude to convert files"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3.8",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "click>=8.1.3",
+    "anthropic>=0.42.0",
+    "python-dotenv>=1.0.1",
+    "pandas>=2.1.0",
+    "pyyaml>=6.0.1",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["smartmutate"]
+
+[project.scripts]
+smartmutate = "smartmutate.__main__:smartmutate"
+

@@ -1,49 +1,31 @@
 import click
 import time
 import sys
-import threading
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 from .engine import ConversionEngine
+from .loading_animation import LoadingAnimation
 
-class LoadingAnimation:
-    """
-    A simple loading animation that shows dots appearing and disappearing.
-    The animation runs in a separate thread so it doesn't block the main conversion process.
-    """
-    def __init__(self, description: str = "Converting"):
-        self.description = description
-        self.is_running = False
-        self.thread = None
-
-    def animate(self):
-        """Animated loading sequence showing dots appearing and disappearing."""
-        while self.is_running:
-            for dots in ["   ", ".  ", ".. ", "..."]:
-                if not self.is_running:
-                    break
-                # Clear the current line and show the updated animation frame
-                click.echo(f"\r{self.description}{dots}", nl=False)
-                time.sleep(0.5)  # Control animation speed
-        
-        sys.stdout.write("\n")
-        sys.stdout.flush()
-
-    def start(self):
-        """Start the loading animation in a separate thread."""
-        self.is_running = True
-        self.thread = threading.Thread(target=self.animate)
-        self.thread.start()
-
-    def stop(self):
-        """Stop the loading animation."""
-        self.is_running = False
-        if self.thread:
-            self.thread.join()
+def load_api_key(env_path: Path | None = None) -> str:
+    """Load API key from .env file or environment"""
+    if env_path:
+        if not env_path.exists():
+            raise ValueError(f"Environment file not found: {env_path}")
+        load_dotenv(env_path)
+    
+    api_key = os.getenv("API_KEY")
+    if not api_key:
+        raise ValueError("API_KEY not found in environment or .env file")
+    return api_key
 
 @click.command()
 @click.argument("input", type=click.Path(exists=True))
 @click.argument("output", type=click.Path())
-def cli(input: str, output: str) -> None:
+@click.option("--api-key", default=None, help="Your Anthropic API key")
+@click.option("--env", type=click.Path(exists=True), help="Path to .env file")
+@click.option("--verbose", is_flag=True, help="Enable verbose output")
+def smartmutate(input: str, output: str, api_key: str | None, env: Path | None = None, verbose: bool = False) -> None: 
     """
     SmartMutator CLI tool for converting files between formats.
     
@@ -52,6 +34,18 @@ def cli(input: str, output: str) -> None:
         output: Path where the output file should be written
     """
     try:
+        if not input or not output:
+            raise ValueError("Please provide input and output paths")
+        
+        if not api_key:
+            try:
+                api_key = load_api_key(env)
+            except ValueError as e:
+                if not env:
+                    api_key = click.prompt("Please enter your Anthropic API key", type=str)
+                else:
+                    raise e
+        
         input_path = Path(input)
         output_path = Path(output)
 
@@ -69,7 +63,8 @@ def cli(input: str, output: str) -> None:
             # Create engine instance and perform conversion
             engine = ConversionEngine(
                 input_path=input_path,
-                output_path=output_path
+                output_path=output_path,
+                api_key=api_key
             )
 
             conversionLoading = LoadingAnimation(f"Attempting conversion...")
@@ -91,3 +86,6 @@ def cli(input: str, output: str) -> None:
     except Exception as e:
         click.echo(f"\nAn unexpected error occurred: {str(e)}", err=True)
         sys.exit(1)
+
+if __name__ == "__main__":
+    smartmutate()
