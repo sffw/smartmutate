@@ -1,116 +1,107 @@
-# ConvertPyAI a powerful file conversion tool powered by Anthropic's Claude AI. It enables seamless conversion between various file formats while preserving context and meaning through AI-powered interpretation.
+<div align="center">
+  <img width="450" src="logo.png" alt="smartmutate logo" />
+</div>
+
+---
+
+Smartmutate is a file conversion tool built in Python that leverages Anthropic's Claude API to intelligently convert data between common file types. 
 
 ## Features
 
-- 🔄 Convert between multiple file formats (CSV, JSON, XML, YAML, etc.)
-- 🤖 AI-powered conversion ensures contextual accuracy
-- 🔑 Simple API key management
-- ⚡ Fast and efficient processing
-- 🛠️ Easy to integrate into existing workflows
-- 📦 Available as both CLI tool and Python library
+- Support for common data formats like JSON, CSV, YAML, and XML
+- Available as command-line interface and as a Python Library
+- Secure API key management
+- Built-in format validation and error handling
 
 ## Installation
 
+Install SmartMutate using pip:
+
 ```bash
-pip install smartMutator
+pip install smartmutate
 ```
 
 ## Quick Start
 
-### Command Line Usage
+SmartMutate can be used either directly from the command line or as a Python library. 
+
+### Command Line
+
+Convert files directly from the terminal:
 
 ```bash
 # Set your Anthropic API key
 export ANTHROPIC_API_KEY='your-api-key'
 
 # Convert a file
-smartMutatornvert input.csv output.json
-
-# Get help
-smartMutatorhelp
+smartmutate input.json output.yaml
 ```
 
-### Python Library Usage
+### Python Library
+
+Use the converter function in your Python code:
 
 ```python
-from smartMutatorport Converter
+from smartmutate import Converter
 
-# Initialize converter with your API key
+# Initialize the converter
 converter = Converter(api_key="your-anthropic-key")
 
 # Convert a file
-converter.convert("input.csv", "output.json")
-
-# Stream large file conversion
-with converter.stream_convert("large_input.csv", "output.json") as stream:
-    for progress in stream:
-        print(f"Progress: {progress}%")
+converter.convert_file("input.json", "output.yaml")
 ```
 
 ## Supported Formats
 
-- CSV
+SmartMutate currently supports conversions between:
 - JSON
-- XML
 - YAML
-- Excel (xlsx, xls)
-- TSV (Tab-separated values)
-- Fixed-width text files
-- Markdown
-- HTML
-- More formats coming soon!
+- CSV
+- TXT
+- More formats coming soon...
+
+Each format is validated before conversion to ensure data integrity.
 
 ## Configuration
 
-Create a configuration file at `~/.smartMutatornfig.yaml`:
+SmartMutate uses your Anthropic API key for conversions. You can provide it in several ways:
+1. Environment variable: `ANTHROPIC_API_KEY`
+2. Direct initialization: `Converter(api_key="your-key")`
+3. Command line argument: `--api-key` OR `--env` followed by the path to your `.env` file
 
-```yaml
-api_key: your-anthropic-key
-default_format: json
-timeout: 300
-max_file_size: 100MB
-```
+## Error Handling
 
-## Advanced Usage
+SmartMutate includes comprehensive error handling for:
+- Invalid file formats
+- Missing input files
+- API connection issues
+- Conversion failures
 
-### Custom Conversion Rules
+Each error provides clear feedback to help troubleshoot issues quickly.
 
-```python
-from smartMutatorport Converter, ConversionRule
+## Development
 
-# Define custom conversion rules
-rule = ConversionRule(
-    source_format="csv",
-    target_format="json",
-    mapping={
-        "column1": "field1",
-        "column2": "field2"
-    }
-)
+### Running Tests
 
-converter = Converter(rules=[rule])
-```
+Run the test suite using pytest:
 
-### Batch Processing
+```bash
+# Install development dependencies
+pip install -e .[test]
 
-```python
-converter.batch_convert(
-    input_dir="input_files/",
-    output_dir="converted_files/",
-    source_format="csv",
-    target_format="json"
-)
+# Run tests
+pytest tests/
 ```
 
 ## Contributing
 
-We welcome contributions!
+We welcome contributions! To get started:
 
 1. Fork the repository
-2. Create your feature branch
-3. Make your changes
+2. Create a feature branch
+3. Make something cool or fix something bad
 4. Submit a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
