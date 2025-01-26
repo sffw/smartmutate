@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smartmutate"
-version = "1.0.9"
+version = "1.0.1"
 authors = [
   { name="Spencer White", email="spence@sffw.dev" },
 ]
@@ -35,3 +35,5 @@ packages = ["smartmutate"]
 [project.scripts]
 smartmutate = "smartmutate.__main__:smartmutate"
 
+[project.urls]
+"Source Code" = "https://github.com/sffw/smartmutate"
