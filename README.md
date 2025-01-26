@@ -8,9 +8,8 @@ Smartmutate is a file conversion tool built in Python that leverages Anthropic's
 
 ## Features
 
-- Support for common data formats like JSON, CSV, YAML, and XML
+- Supports for common data formats like JSON, CSV, YAML, and XML (more formats coming soon)
 - Available as command-line interface and as a Python Library
-- Secure API key management
 - Built-in format validation and error handling
 
 ## Installation
